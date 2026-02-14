@@ -28,8 +28,8 @@ public sealed class IdentityClientTests(FederationProviderFixture server) :
         Assert.NotEmpty(result.Data.RefreshToken);
     }
 
-    [Fact(DisplayName = "[e2e] - when authenticate with non-existent user should return #VINDER-IDP-ERR-AUT-404 error")]
-    public async Task WhenAuthenticate_WithNonExistentUser_ShouldReturnUserNotFound()
+    [Fact(DisplayName = "[e2e] - when authenticate with non-existent user should return #ERROR-A7E7C")]
+    public async Task WhenAuthenticate_WithNonExistentUser_ShouldReturnInvalidCredentials()
     {
         /* arrange: create an identity client with the proper realm header */
         var identityClient = new IdentityClient(_httpClient.WithRealm("master"));
@@ -49,7 +49,7 @@ public sealed class IdentityClientTests(FederationProviderFixture server) :
         Assert.Equal(AuthenticationErrors.InvalidCredentials, result.Error);
     }
 
-    [Fact(DisplayName = "[e2e] - when authenticate with valid user but wrong password should return #VINDER-IDP-ERR-AUT-401 error")]
+    [Fact(DisplayName = "[e2e] - when authenticate with valid user but wrong password should return #ERROR-A7E7C error")]
     public async Task WhenAuthenticate_WithValidUserButWrongPassword_ShouldReturnInvalidCredentials()
     {
         /* arrange: create an identity client with the proper realm header */
@@ -70,7 +70,7 @@ public sealed class IdentityClientTests(FederationProviderFixture server) :
         Assert.Equal(AuthenticationErrors.InvalidCredentials, result.Error);
     }
 
-    [Fact(DisplayName = "[e2e] - when authenticate without realm header should return #VINDER-IDP-ERR-TNT-400 error")]
+    [Fact(DisplayName = "[e2e] - when authenticate without realm header should return #ERROR-B2E42 error")]
     public async Task WhenAuthenticate_WithoutRealmHeader_ShouldReturnRealmHeaderMissing()
     {
         /* arrange: ensure realm header is removed before creating the identity client */
@@ -97,7 +97,7 @@ public sealed class IdentityClientTests(FederationProviderFixture server) :
         Assert.Equal(RealmErrors.RealmHeaderMissing, result.Error);
     }
 
-    [Fact(DisplayName = "[e2e] - when authenticate with non-existent realm should return #VINDER-IDP-ERR-TNT-404 error")]
+    [Fact(DisplayName = "[e2e] - when authenticate with non-existent realm should return #ERROR-2FB9A error")]
     public async Task WhenAuthenticate_WithNonExistentRealm_ShouldReturnRealmDoesNotExist()
     {
         /* arrange: create an identity client with a non-existent realm header */
