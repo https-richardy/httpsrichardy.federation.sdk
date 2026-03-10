@@ -2,13 +2,13 @@ namespace HttpsRichardy.Federation.Sdk.Extensions;
 
 public static class HttpClientBuilderExtensions
 {
-    public static IHttpClientBuilder AddSdkHttpClient<TClient, TImplementation>(this IServiceCollection services, string baseUrl)
+    public static IHttpClientBuilder AddSdkHttpClient<TClient, TImplementation>(this IServiceCollection services, string authority)
         where TClient : class
         where TImplementation : class, TClient
     {
         return services.AddHttpClient<TClient, TImplementation>(client =>
         {
-            client.BaseAddress = new Uri(baseUrl);
+            client.BaseAddress = new Uri(authority);
         });
     }
 

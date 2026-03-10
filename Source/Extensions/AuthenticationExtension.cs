@@ -10,7 +10,7 @@ public static class AuthenticationExtension
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(configuration =>
             {
-                configuration.Authority = options.BaseUrl;
+                configuration.Authority = options.Authority;
                 configuration.Audience = options.Realm;
                 configuration.RequireHttpsMetadata = false;
             });

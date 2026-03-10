@@ -14,26 +14,26 @@ public static class FederationExtension
         services.AddSingleton(options);
         services.AddHttpClient<IConnectClient, ConnectClient>(client =>
         {
-            client.BaseAddress = new Uri(options.BaseUrl);
+            client.BaseAddress = new Uri(options.Authority);
         });
 
-        services.AddSdkHttpClient<IIdentityClient, IdentityClient>(options.BaseUrl)
+        services.AddSdkHttpClient<IIdentityClient, IdentityClient>(options.Authority)
             .WithRealmInterceptor()
             .WithAuthenticationInterceptor();
 
-        services.AddSdkHttpClient<IPermissionsClient, PermissionsClient>(options.BaseUrl)
+        services.AddSdkHttpClient<IPermissionsClient, PermissionsClient>(options.Authority)
             .WithRealmInterceptor()
             .WithAuthenticationInterceptor();
 
-        services.AddSdkHttpClient<IGroupsClient, GroupsClient>(options.BaseUrl)
+        services.AddSdkHttpClient<IGroupsClient, GroupsClient>(options.Authority)
             .WithRealmInterceptor()
             .WithAuthenticationInterceptor();
 
-        services.AddSdkHttpClient<IRealmsClient, RealmsClient>(options.BaseUrl)
+        services.AddSdkHttpClient<IRealmsClient, RealmsClient>(options.Authority)
             .WithRealmInterceptor()
             .WithAuthenticationInterceptor();
 
-        services.AddSdkHttpClient<IUsersClient, UsersClient>(options.BaseUrl)
+        services.AddSdkHttpClient<IUsersClient, UsersClient>(options.Authority)
             .WithRealmInterceptor()
             .WithAuthenticationInterceptor();
 
